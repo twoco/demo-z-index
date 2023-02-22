@@ -49,9 +49,12 @@
       .container {
         flex: 1;
       }
-      @media (max-width: 600px) {
+      @media (max-width: 425px) {
         body {
           flex-direction: column;
+        }
+        .container{
+          flex: unset;
         }
       }
     </style>
