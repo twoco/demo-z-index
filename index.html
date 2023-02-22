@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Z-Index</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #ddd;
+        display: flex;
+        padding: 20px;
+        gap: 20px;
+        box-sizing: border-box;
+      }
+      .col {
+        display: flex;
+        flex-direction: column;
+      }
+      .item {
+        background-color: #fff;
+        padding: 10px 20px;
+        cursor: pointer;
+        user-select: none;
+      }
+      .item.active {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+        /* Z-Index is necessary for shadows around. */
+        /* Otherwise, the elements below overlay it. */
+        /* Switch the next line to test. */
+        /* z-index: 1; */
+      }
+
+      /* Just to bring both lists on one screen. */
+      /* You can remove it and toggle the above z-index if you want. */
+      .col.with-z-index .item.active {
+        z-index: 1;
+      }
+      h4 {
+        text-align: center;
+      }
+      .container {
+        flex: 1;
+      }
+      @media (max-width: 600px) {
+        body {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h4>List without z-index</h4>
+      <div class="col">
+        <div class="item">Item</div>
+        <div class="item">Item</div>
+        <div class="item active">Item</div>
+        <div class="item">Item</div>
+        <div class="item">Item</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h4>List with z-index</h4>
+      <div class="col with-z-index">
+        <div class="item">Item</div>
+        <div class="item">Item</div>
+        <div class="item active">Item</div>
+        <div class="item">Item</div>
+        <div class="item">Item</div>
+      </div>
+    </div>
+
+    <script>
+      const items = document.querySelectorAll(".item");
+      items.forEach((item) => {
+        item.addEventListener("click", () => {
+          items.forEach((otherItem) => otherItem.classList.remove("active"));
+          item.classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>
